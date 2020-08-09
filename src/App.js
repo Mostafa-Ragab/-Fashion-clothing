@@ -47,14 +47,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-      <Header currentUser={this.state.currentUser} />
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route path='/shop' component={ShopPage} />
-        <Route path='/signin' component={SignInAndSignUpPage} />
-      </Switch>
-    </div>
+        <Header currentUser={this.state.currentUser} />
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route path='/signin' component={SignInAndSignUpPage} />
+        </Switch>
+      </div>
     );
   }
 }
+
 export default App;
