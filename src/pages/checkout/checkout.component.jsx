@@ -2,38 +2,39 @@ import React from 'react';
 import {createStructuredSelector} from 'reselect';
 import './checkout.styles.scss';
 import {connect } from 'react-redux';
-import {selectCartItems, selectCarTotal} from '../../redux/cart/cart.selectors'
+import {selectCartItems, selectCartTotal} from '../../redux/cart/cart.selectors'
+import CheckOutItem from '../../component/checkout-item/checkout-item.component';
 
-const CheckOut = (cartItems,total) => (
+const CheckoutPage = ({ cartItems, total }) => (
     <div className='checkout-page'>
-        <div className='checkout-header'>
-            <span className='header-block'>Product</span>
+      <div className='checkout-header'>
+        <div className='header-block'>
+          <span>Product</span>
         </div>
-        <div className='checkout-header'>
-            <span className='header-block'>Description</span>
+        <div className='header-block'>
+          <span>Description</span>
         </div>
-        <div className='checkout-header'>
-            <span className='header-block'>Quantity</span>
+        <div className='header-block'>
+          <span>Quantity</span>
         </div>
-        <div className='checkout-header'>
-            <span className='header-block'>Price</span>
+        <div className='header-block'>
+          <span>Price</span>
         </div>
-        <div className='checkout-header'>
-            <span className='header-block'>Total</span>
+        <div className='header-block'>
+          <span>Remove</span>
         </div>
-        {
-            cartItems.map(cartItem => 
-                cartItem.Name
-            )
-        }
-        <div className='total'>
-            <span>TOTAL: ${total}</span>
-        </div>
+      </div>
+      {cartItems.map(cartItem => (
+        <CheckOutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
+      <div className='total'>TOTAL: ${total}</div>
     </div>
-);
+  );
+
+  
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems,
-    total : selectCarTotal
+    total : selectCartTotal
 })
 
-export default connect(mapStateToProps)(CheckOut);
+export default connect(mapStateToProps)(CheckoutPage);
