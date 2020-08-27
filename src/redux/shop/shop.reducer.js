@@ -1,4 +1,6 @@
-import shopActionTypes from './shop.types.js'
+import shopActionTypes from './shop.types.js';
+
+
 const INITIAL_STATE = {
     collections: null,
     isFetching: false,
