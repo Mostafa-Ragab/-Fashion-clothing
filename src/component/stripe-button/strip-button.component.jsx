@@ -6,20 +6,37 @@ const StripeCheckoutButton = ({ price }) => {
 
     const publishableKey = 'pk_test_51HIOKvBPrOCucvB0W0VwCxNTVDsiY7Knu7TI6vAbPIxHiZGmqPXywvNgVbwaDZxHEJ3vYlwWYGz8wr2zx9FLlvIL00DJbWorEf';
 
-    const OnToken = token => {
-        console.log(token);
-        alert('Payment Successful')
-    }
+    
+    const onToken = (token) => {
+        axios({
+          url: "payment",
+          method: "post",
+          data: {
+            amount: priceForStripe,
+            token: token,
+          },
+        })
+          .then((response) => {
+            alert("succesful payment");
+          })
+          .catch((error) => {
+            console.log("Payment Error: ", error);
+            alert(
+              "There was an issue with your payment! Please make sure you use the provided credit card."
+            );
+          });
+    };
+    
     return (
         <StripeCheckout
-          label='Pay Now'
-          name='fashion Clothing Ltd.'
+          label="Pay Now"
+          name="fashoin Clothing Ltd."
           billingAddress
           shippingAddress
-          image='https://svgshare.com/i/CUz.svg'
+          image="https://svgshare.com/i/CUz.svg"
           description={`Your total is $${price}`}
           amount={priceForStripe}
-          panelLabel='Pay Now'
+          panelLabel="Pay Now"
           token={onToken}
           stripeKey={publishableKey}
         />
