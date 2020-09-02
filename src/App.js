@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import './App.css';
-
+import {cheackUserSeasion} from './redux/user/user.action';
 import HomePage from './pages/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
@@ -12,9 +12,8 @@ import CheckoutPage from './pages/checkout/checkout.component';
 
 import Header from './component/header/header.component';
 
-import { auth, createUserProfileDocument } from './component/firebase/firebase.utiles';
 
-import { setCurrentUser } from './redux/user/user.action';
+
 import { selectCurrentUser } from './redux/user/user.selector';
 
 
@@ -22,22 +21,23 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const {cheackUserSeasion} = this.props;
+    cheackUserSeasion();
+    
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    //     userRef.onSnapshot(snapShot => {
+    //       setCurrentUser({
+    //         id: snapShot.id,
+    //         ...snapShot.data()
+    //       });
+    //     });
+    //   }
 
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      }
-
-      setCurrentUser(userAuth);
-    });
+  //     setCurrentUser(userAuth);
+  //   });
   }
 
   componentWillUnmount() {
@@ -74,11 +74,12 @@ const mapStateToProps = createStructuredSelector({
 
 });
 
+
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  cheackUserSeasion: () => dispatch(cheackUserSeasion())
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+ )(App);
