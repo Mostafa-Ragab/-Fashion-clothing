@@ -1,6 +1,6 @@
 import React from 'react';
 import './sign-up.styles.scss';
-import { createUserProfileDocument, auth} from '../firebase/firebase.utiles';
+// import { createUserProfileDocument, auth} from '../firebase/firebase.utiles';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.componenet';
 import {signUpStart} from '../../redux/user/user.action';
@@ -47,7 +47,7 @@ class SignUp extends React.Component {
   //   } catch (error) {
   //     console.error(error);
   //   }
-  // };
+  };
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -102,7 +102,7 @@ class SignUp extends React.Component {
 }
 
 const mapdDispatchToProps = dispatch => ({
-  signUpStart: userCredentials => dispatch(signUpStart(onSignUpSuccess))
+  signUpStart: userCredentials => dispatch(signUpStart(userCredentials))
 })
 
-export default connect(mapdDispatchToProps)(SignUp);
+export default connect(null,mapdDispatchToProps)(SignUp);
