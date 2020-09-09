@@ -1,5 +1,5 @@
 {
-  "name": "crwn-clothing-server",
+  "name": "fashion-clothing-server",
   "version": "1.0.0",
   "ingines": {
     "node":"12.18.3",
