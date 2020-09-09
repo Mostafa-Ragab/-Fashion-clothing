@@ -2,9 +2,8 @@
   "name": "fashion-clothing-server",
   "version": "1.0.0",
   "ingines": {
-    "node":"12.18.3",
-    "npm":"6.14.6"
-
+    "node": "12.18.3",
+    "npm": "6.14.6"
   },
   "scripts": {
     "client": "cd client && npm start",
